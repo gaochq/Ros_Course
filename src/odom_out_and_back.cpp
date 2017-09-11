@@ -36,10 +36,10 @@ Pose_Type Get_RobotPose()
     {
         if(flag)
         {
-            listener.waitForTransform("/odom", "/base_link", ros::Time(0), ros::Duration(3.0));
+            listener.waitForTransform("/odom", "/base_footprint", ros::Time(0), ros::Duration(3.0));
             flag = false;
         }
-        listener.lookupTransform("/odom", "/base_link", ros::Time(0), transform);
+        listener.lookupTransform("/odom", "/base_footprint", ros::Time(0), transform);
     }
     catch (tf::TransformException ex)
     {
@@ -73,12 +73,12 @@ int main(int argc, char **argv)
     Pose_Type Pose_Currenrt;
     float linear_speed = 0.2;
     double goal_distance = 1.0;
-    float angular_speed = 0.28;
+    float angular_speed = 0.4;
     double goal_angle = M_PIl;
-    double angular_tolerance = 0.0456332;
+    double angular_tolerance = 0.040;
 
     float linear_duration = goal_distance/linear_speed;
-    int rate = 50;
+    int rate = 100;
     ros::Rate loop_rate(rate);
 
     while (ros::ok())
@@ -113,7 +113,7 @@ int main(int argc, char **argv)
             double turn_angle = 0.0;
             double delta_angle;
 
-            while(fabs(turn_angle + 0.0) < fabs(goal_angle) && !ros::isShuttingDown())
+            while(fabs(turn_angle + angular_tolerance) < fabs(goal_angle) && !ros::isShuttingDown())
             {
                 OdomOutBack_pub.publish(Move_cmd);
                 //loop_rate.sleep();

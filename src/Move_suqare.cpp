@@ -36,10 +36,10 @@ Pose_Type Get_RobotPose()
     {
         if(flag)
         {
-            listener.waitForTransform("/odom", "/base_link", ros::Time(0), ros::Duration(3.0));
+            listener.waitForTransform("/odom", "/base_footprint", ros::Time(0), ros::Duration(3.0));
             flag = false;
         }
-        listener.lookupTransform("/odom", "/base_link", ros::Time(0), transform);
+        listener.lookupTransform("/odom", "/base_footprint", ros::Time(0), transform);
     }
     catch (tf::TransformException ex)
     {
@@ -73,7 +73,7 @@ int main(int argc, char **argv)
     Pose_Type Pose_Currenrt;
     float linear_speed = 0.1;
     float goal_distance = 1.0;
-    float angular_speed = 0.2;
+    float angular_speed = 0.4;
     double goal_angle = M_PI_2l;
     double angular_tolerance = 0.0436332;
 
@@ -121,6 +121,7 @@ int main(int argc, char **argv)
                 delta_angle = Normalize_angle(Pose_Currenrt.second - last_angle);
                 turn_angle += delta_angle;
                 last_angle = Pose_Currenrt.second;
+                loop_rate.sleep();
             }
             // Stop the robot
             Reset_MoveCmd(Move_cmd);
