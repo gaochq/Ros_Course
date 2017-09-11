@@ -76,7 +76,7 @@ rosrun rbx1_control Move_square
 ```
 
 ### 2.3 键盘控制底座运动
-&emsp;&emsp;首先启动模拟机器人和RViz监视窗口
+首先启动模拟机器人和RViz监视窗口
 ```shell
 roslaunch rbx1_bringup fake_turtlebot.launch
 rosrun rviz rviz -d `rospack find rbx1_nav`/sim.rviz
