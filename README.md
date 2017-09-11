@@ -1,4 +1,5 @@
 ## ROS控制移动底座
+tags:其他
 &emsp;&emsp;本代码是[rbx1](https://github.com/pirobot/rbx1)部分节点的C++版本。
 
 ## 1 依赖项
@@ -76,7 +77,7 @@ rosrun rbx1_control Move_square
 ```
 
 ### 2.3 键盘控制底座运动
-首先启动模拟机器人和RViz监视窗口
+&emsp;&emsp;首先启动模拟机器人和RViz监视窗口
 ```shell
 roslaunch rbx1_bringup fake_turtlebot.launch
 rosrun rviz rviz -d `rospack find rbx1_nav`/sim.rviz
@@ -86,5 +87,4 @@ rosrun rviz rviz -d `rospack find rbx1_nav`/sim.rviz
 rosrun rbx1_control Keyboard_Control
 ```
 将光标停留在遥控终端窗口，输入`wsad`，机器人会按照对应的方向移动，`shift`按键会加速移动。       
-__注:键盘控制节点代码出自[古月](http://blog.csdn.net/hcx25909/article/details/9004617)的CSDN博客__
-
+__注:键盘控制节点代码使用[古-月](http://blog.csdn.net/hcx25909/article/details/9004617)的CSDN博客。__
