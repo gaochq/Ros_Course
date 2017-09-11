@@ -1,5 +1,4 @@
 ## ROS控制移动底座
-tags:其他
 &emsp;&emsp;本代码是[rbx1](https://github.com/pirobot/rbx1)部分节点的C++版本。
 
 ## 1 依赖项
