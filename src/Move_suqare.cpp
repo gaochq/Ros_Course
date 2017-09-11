@@ -73,7 +73,7 @@ int main(int argc, char **argv)
     Pose_Type Pose_Currenrt;
     float linear_speed = 0.1;
     float goal_distance = 1.0;
-    float angular_speed = 0.05;
+    float angular_speed = 0.2;
     double goal_angle = M_PI_2l;
     double angular_tolerance = 0.0436332;
 
@@ -94,7 +94,7 @@ int main(int argc, char **argv)
             while(Distance < goal_distance && !ros::isShuttingDown())
             {
                 OdomOutBack_pub.publish(Move_cmd);
-                loop_rate.sleep();
+                //loop_rate.sleep();
                 Pose_Currenrt = Get_RobotPose();
                 Distance = sqrt(pow(Pose_Currenrt.first.x() - Pose_tmp.first.x(), 2) +
                                 pow(Pose_Currenrt.first.y() - Pose_tmp.first.y(), 2));
@@ -115,7 +115,7 @@ int main(int argc, char **argv)
             while(fabs(turn_angle + angular_tolerance) < goal_angle &&  !ros::isShuttingDown())
             {
                 OdomOutBack_pub.publish(Move_cmd);
-                loop_rate.sleep();
+                //loop_rate.sleep();
 
                 Pose_Currenrt = Get_RobotPose();
                 delta_angle = Normalize_angle(Pose_Currenrt.second - last_angle);

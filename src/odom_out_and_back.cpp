@@ -116,7 +116,7 @@ int main(int argc, char **argv)
             while(fabs(turn_angle + 0.0) < fabs(goal_angle) && !ros::isShuttingDown())
             {
                 OdomOutBack_pub.publish(Move_cmd);
-                loop_rate.sleep();
+                //loop_rate.sleep();
 
                 Pose_Currenrt = Get_RobotPose();
                 delta_angle = Normalize_angle(Pose_Currenrt.second - last_angle);
