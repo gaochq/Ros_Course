@@ -71,20 +71,19 @@ int main(int argc, char **argv)
 
     geometry_msgs::Twist Move_cmd;
     Pose_Type Pose_Currenrt;
-    float linear_speed = 0.2;
-    double goal_distance = 1.0;
-    float angular_speed = 0.28;
-    double goal_angle = M_PIl;
-    double angular_tolerance = 0.0456332;
+    float linear_speed = 0.1;
+    float goal_distance = 1.0;
+    float angular_speed = 0.05;
+    double goal_angle = M_PI_2l;
+    double angular_tolerance = 0.0436332;
 
-    float linear_duration = goal_distance/linear_speed;
-    int rate = 50;
+    int rate = 1000;
     ros::Rate loop_rate(rate);
 
     while (ros::ok())
     {
         Reset_MoveCmd(Move_cmd);
-        for (int i = 0; i < 2; ++i)
+        for (int i = 0; i < 4; ++i)
         {
             Move_cmd.linear.x = linear_speed;
             Pose_Type Pose_tmp;
@@ -113,7 +112,7 @@ int main(int argc, char **argv)
             double turn_angle = 0.0;
             double delta_angle;
 
-            while(fabs(turn_angle + 0.0) < fabs(goal_angle) && !ros::isShuttingDown())
+            while(fabs(turn_angle + angular_tolerance) < goal_angle &&  !ros::isShuttingDown())
             {
                 OdomOutBack_pub.publish(Move_cmd);
                 loop_rate.sleep();

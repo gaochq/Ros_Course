@@ -67,7 +67,7 @@ int main(int argc, char **argv)
             TimeOutBack_pub.publish(Move_cmd);
             ros::Duration(1).sleep();
         }
-        // Close the node
+        // Shutdown the node
         ros::shutdown();
     }
     return 0;
