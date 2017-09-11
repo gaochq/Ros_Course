@@ -1,9 +1,7 @@
-# ROS底盘控制
-&emsp;&emsp;此工程是[rbx1](https://github.com/pirobot/rbx1)部分节点的C++版本。
+## ROS控制移动底座
+&emsp;&emsp;本代码是[rbx1](https://github.com/pirobot/rbx1)部分节点的C++版本。
 
----
 ## 1 依赖项
-*****
 - ROS Indigo
 - ArbotiX Simulator
 ```shell
