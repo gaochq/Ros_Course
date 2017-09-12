@@ -9,7 +9,7 @@ sudo apt-get install ros-indigo-arbotix- *
 ```
 - Rbx1_Control
 ```shell
-git clone https://github.com/pirobot/rbx1.git 
+https://github.com/gaochq/Ros_Course 
 ```
 
 ## 2 实验内容
