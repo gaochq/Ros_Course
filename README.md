@@ -7,10 +7,15 @@
 ```shell
 sudo apt-get install ros-indigo-arbotix- *
 ```
+或者选择源码的安装方式(__推荐__)
+```shell
+git clone https://github.com/pirobot/rbx1.git
+```
 - Rbx1_Control
 ```shell
-https://github.com/gaochq/Ros_Course 
+git clone https://github.com/gaochq/Ros_Course
 ```
+
 
 ## 2 实验内容
 ### 2.1 Twist 消息和轮子转动
