@@ -5,7 +5,7 @@
 - ROS Indigo
 - ArbotiX Simulator
 ```shell
-sudo apt-get install ros-indigo-arbotix- *
+sudo apt-get install ros-indigo-arbotix-*
 ```
 或者选择源码的安装方式(__推荐__)
 ```shell
