@@ -95,4 +95,4 @@ rosrun rbx1_control Keyboard_Control
 arbotix_gui
 ```
 将光标停留在遥控终端窗口，输入`wsad`，机器人会按照对应的方向移动，`shift`按键会加速移动。       
-__注:键盘控制节点代码使用[古-月](http://blog.csdn.net/hcx25909/article/details/9004617)的CSDN博客。__
+__注:键盘控制节点代码出自[古-月](http://blog.csdn.net/hcx25909/article/details/9004617)的博客。__
