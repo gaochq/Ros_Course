@@ -10,6 +10,7 @@
 #include "math.h"
 
 typedef std::pair<tf::Vector3, double> Pose_Type;
+bool flag = true;
 
 void Reset_MoveCmd(geometry_msgs::Twist &Move_cmd)
 {
@@ -23,20 +24,18 @@ void Reset_MoveCmd(geometry_msgs::Twist &Move_cmd)
 }
 
 // Get the current Position and Yaw angular of the robot
-Pose_Type Get_RobotPose()
+Pose_Type Get_RobotPose(tf::TransformListener &listener)
 {
-    tf::TransformListener listener;
     tf::StampedTransform  transform;
     tf::Quaternion Orientation;
     tf::Vector3 Position;
-    bool flag = true;
     double Roll, Pitch, Yaw;
 
     try
     {
         if(flag)
         {
-            listener.waitForTransform("/odom", "/base_footprint", ros::Time(0), ros::Duration(3.0));
+            listener.waitForTransform("/odom", "/base_footprint", ros::Time(0), ros::Duration(1.0));
             flag = false;
         }
         listener.lookupTransform("/odom", "/base_footprint", ros::Time(0), transform);
@@ -81,6 +80,7 @@ int main(int argc, char **argv)
     int rate = 100;
     ros::Rate loop_rate(rate);
 
+    tf::TransformListener listener;
     while (ros::ok())
     {
         Reset_MoveCmd(Move_cmd);
@@ -88,7 +88,7 @@ int main(int argc, char **argv)
         {
             Move_cmd.linear.x = linear_speed;
             Pose_Type Pose_tmp;
-            Pose_tmp = Get_RobotPose();
+            Pose_tmp = Get_RobotPose(listener);
 
             double Distance = 0;
             // Move forward
@@ -96,7 +96,7 @@ int main(int argc, char **argv)
             {
                 OdomOutBack_pub.publish(Move_cmd);
                 loop_rate.sleep();
-                Pose_Currenrt = Get_RobotPose();
+                Pose_Currenrt = Get_RobotPose(listener);
                 Distance = sqrt(pow(Pose_Currenrt.first.x() - Pose_tmp.first.x(), 2) +
                                 pow(Pose_Currenrt.first.y() - Pose_tmp.first.y(), 2));
             }
@@ -118,7 +118,7 @@ int main(int argc, char **argv)
                 OdomOutBack_pub.publish(Move_cmd);
                 //loop_rate.sleep();
 
-                Pose_Currenrt = Get_RobotPose();
+                Pose_Currenrt = Get_RobotPose(listener);
                 delta_angle = Normalize_angle(Pose_Currenrt.second - last_angle);
                 turn_angle += delta_angle;
                 last_angle = Pose_Currenrt.second;
