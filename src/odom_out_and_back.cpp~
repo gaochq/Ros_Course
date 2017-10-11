@@ -70,20 +70,21 @@ int main(int argc, char **argv)
 
     geometry_msgs::Twist Move_cmd;
     Pose_Type Pose_Currenrt;
-    float linear_speed = 0.1;
-    float goal_distance = 1.0;
+    float linear_speed = 0.2;
+    double goal_distance = 1.0;
     float angular_speed = 0.4;
-    double goal_angle = M_PI_2l;
+    double goal_angle = M_PIl;
     double angular_tolerance = 0.040;
 
-    int rate = 1000;
+    float linear_duration = goal_distance/linear_speed;
+    int rate = 100;
     ros::Rate loop_rate(rate);
 
     tf::TransformListener listener;
     while (ros::ok())
     {
         Reset_MoveCmd(Move_cmd);
-        for (int i = 0; i < 4; ++i)
+        for (int i = 0; i < 2; ++i)
         {
             Move_cmd.linear.x = linear_speed;
             Pose_Type Pose_tmp;
@@ -94,11 +95,10 @@ int main(int argc, char **argv)
             while(Distance < goal_distance && !ros::isShuttingDown())
             {
                 OdomOutBack_pub.publish(Move_cmd);
-                //loop_rate.sleep();
+                loop_rate.sleep();
                 Pose_Currenrt = Get_RobotPose(listener);
                 Distance = sqrt(pow(Pose_Currenrt.first.x() - Pose_tmp.first.x(), 2) +
                                 pow(Pose_Currenrt.first.y() - Pose_tmp.first.y(), 2));
-		loop_rate.sleep();
             }
 
             // Stop the robot
@@ -113,7 +113,7 @@ int main(int argc, char **argv)
             double turn_angle = 0.0;
             double delta_angle;
 
-            while(fabs(turn_angle + angular_tolerance) < goal_angle &&  !ros::isShuttingDown())
+            while(fabs(turn_angle + angular_tolerance) < fabs(goal_angle) && !ros::isShuttingDown())
             {
                 OdomOutBack_pub.publish(Move_cmd);
                 //loop_rate.sleep();
@@ -122,7 +122,7 @@ int main(int argc, char **argv)
                 delta_angle = Normalize_angle(Pose_Currenrt.second - last_angle);
                 turn_angle += delta_angle;
                 last_angle = Pose_Currenrt.second;
-                loop_rate.sleep();
+		loop_rate.sleep();
             }
             // Stop the robot
             Reset_MoveCmd(Move_cmd);

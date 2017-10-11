@@ -99,6 +99,7 @@ int main(int argc, char **argv)
                 Pose_Currenrt = Get_RobotPose(listener);
                 Distance = sqrt(pow(Pose_Currenrt.first.x() - Pose_tmp.first.x(), 2) +
                                 pow(Pose_Currenrt.first.y() - Pose_tmp.first.y(), 2));
+		loop_rate.sleep();
             }
 
             // Stop the robot
@@ -122,6 +123,7 @@ int main(int argc, char **argv)
                 delta_angle = Normalize_angle(Pose_Currenrt.second - last_angle);
                 turn_angle += delta_angle;
                 last_angle = Pose_Currenrt.second;
+		loop_rate.sleep();
             }
             // Stop the robot
             Reset_MoveCmd(Move_cmd);
