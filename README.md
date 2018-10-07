@@ -96,21 +96,3 @@ arbotix_gui
 ```
 将光标停留在遥控终端窗口，输入`wsad`，机器人会按照对应的方向移动，`shift`按键会加速移动。       
 __注:键盘控制节点代码出自[古-月](http://blog.csdn.net/hcx25909/article/details/9004617)的博客。__
-
-```shell
-sudo apt-get install ros-indigo-turtlebot-bringup \
-ros-indigo-turtlebot-create-desktop ros-indigo-openni-* \
-ros-indigo-openni2-* ros-indigo-freenect-* ros-indigo-usb-cam \
-ros-indigo-laser-* ros-indigo-hokuyo-node \
-ros-indigo-audio-common gstreamer0.10-pocketsphinx \
-ros-indigo-pocketsphinx ros-indigo-slam-gmapping \
-ros-indigo-joystick-drivers python-rosinstall \
-ros-indigo-orocos-kdl ros-indigo-python-orocos-kdl \
-python-setuptools ros-indigo-dynamixel-motor-* \
-libopencv-dev python-opencv ros-indigo-vision-opencv \
-ros-indigo-depthimage-to-laserscan ros-indigo-arbotix-* \
-ros-indigo-turtlebot-teleop ros-indigo-move-base \
-ros-indigo-map-server ros-indigo-fake-localization \
-ros-indigo-amcl git subversion mercurial
-```
-
